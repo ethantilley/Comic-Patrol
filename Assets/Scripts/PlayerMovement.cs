@@ -7,40 +7,66 @@ public class PlayerMovement : MonoBehaviour {
     public float baseSpeed = 5;
     public float currentSpeed = 5;
     public float changeSpeedPercent = 0.5f;
-    public float jumpSpeed = 2;
+
+  
+    public float jumpHeight = 1f;
+    public float jumpSpeed = 2.5f;
     public bool jumping = false;
+
+    float min = -2.5f, max = -1.5f;
+    float step = 0;
+    public Vector3 target;
 
 	// Use this for initialization
 	void Start () {
 		
 	}
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update()
+    {
         ConsistentMove();
         CheckInput();
-	}
+
+        if (Input.GetKeyDown(KeyCode.UpArrow) && !jumping)
+        {
+            jumping = true;
+        }
+
+        transform.position = new Vector3(transform.position.x, Mathf.Lerp(min, max, step), 0);
+
+        if (jumping)
+        {
+            step += jumpSpeed * Time.deltaTime;
+        }
+
+        if (step > 1)
+        {
+            float temp = max;
+            max = min;
+            min = temp;
+            step = 0.0f;
+            if (temp < -1.5f)
+            {
+                jumping = false;
+                //Hack, player can inc speed.
+            }
+        }
+
+    }
 
     void ConsistentMove()
     {
        transform.Translate((Vector3.right * currentSpeed) * Time.deltaTime);
     }
 
-    void PlayerJump()
-    {
-        transform.Translate((Vector3.up * jumpSpeed) * Time.deltaTime);
-    }
+   
 
     void CheckInput()
     {
-        //Hack, This Jump is not at-all what i want.... 
-        if (Input.GetKeyDown(KeyCode.UpArrow))
-        {
-            jumping = true;
-            PlayerJump();
-        }
-        if (Input.GetKeyUp(KeyCode.UpArrow))
-            jumping = false;
+       
+      
+
 
         if (jumping)
             return;

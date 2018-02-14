@@ -6,12 +6,17 @@ public class PlayerShooting : MonoBehaviour {
 
     public GameObject bullet;
 
-    public Transform[] shootPositions;
+    public Transform frontShootPosition;
+    public Transform topShootPosition;
 
     public List<GameObject> bullets = new List<GameObject>();
 
     public float bulletSpeed;
     public float bulletLifeTime = 2;
+
+    public float frontGunCooldown = 0;
+    public float topGunCooldown = 0;
+
     // Use this for initialization
     void Start () {
 		
@@ -21,7 +26,7 @@ public class PlayerShooting : MonoBehaviour {
 	void Update () {
         CheckShooting();
         MoveBullets();
-	}
+    }
 
     void MoveBullets()
     {
@@ -37,20 +42,39 @@ public class PlayerShooting : MonoBehaviour {
 
     void CheckShooting()
     {
+        frontGunCooldown -= Time.deltaTime;
+        topGunCooldown -= Time.deltaTime;
+
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            Shoot();
+            if (frontGunCooldown <= 0)
+            {
+                frontGunCooldown = 0;
+                ShootFront();
+            }
+            if (topGunCooldown <= 0)
+            {
+                topGunCooldown = 0;
+                ShootTop();
+            }
         }
     }
 
-    void Shoot()
-    {
-        for (int i = 0; i < shootPositions.Length; i++)
-        {
-            GameObject newBull = Instantiate(bullet, shootPositions[i].transform.position, shootPositions[i].transform.rotation);
-            Destroy(newBull, bulletLifeTime);
-            bullets.Add(newBull);
+    void ShootFront()
+    {       
+            GameObject newBull = Instantiate(bullet, frontShootPosition.transform.position, frontShootPosition.transform.rotation);
             
-        }
+            Destroy(newBull, bulletLifeTime);
+            
+            bullets.Add(newBull);
+        frontGunCooldown = 1.8f;
+    }
+
+    void ShootTop()
+    {
+        GameObject newBull = Instantiate(bullet, topShootPosition.transform.position, topShootPosition.transform.rotation);
+        Destroy(newBull, bulletLifeTime);
+        bullets.Add(newBull);
+        topGunCooldown = 0.5f;
     }
 }

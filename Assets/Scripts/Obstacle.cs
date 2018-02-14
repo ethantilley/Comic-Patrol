@@ -14,19 +14,30 @@ public class Obstacle : MonoBehaviour {
 		
 	}
 
-    private void OnCollisionEnter2D(Collision2D coll)
+    private void OnTriggerEnter2D(Collider2D coll)
     {
 
         if (coll.gameObject.CompareTag("Bullet"))
         {
-            Destroy(gameObject);
             Destroy(coll.gameObject);
+            Destroy(gameObject);
         }
 
         if (coll.gameObject.CompareTag("Player"))
         {
             // respawn.
-            GameManager.instance.ReSpawnPlayer();
+
+            if (GameManagerScript.instance.playerLives > 0)
+            {
+                print("aye?");
+                GameManagerScript.instance.ReSpawnPlayer(coll.gameObject);
+                coll.gameObject.GetComponent<SpriteRenderer>().enabled = false;
+            }
+            else
+            {
+                Destroy(coll.gameObject);
+            }
+            Destroy(gameObject);
         }
 
     }

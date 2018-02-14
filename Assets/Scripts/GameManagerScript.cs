@@ -2,19 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour {
+public class GameManagerScript : MonoBehaviour {
 
     public int playerScore;
     public int playerLives;
 
-    public static GameManager instance;
+    public static GameManagerScript instance;
 
     private void Awake()
     {
         if (instance != this)
         {
-            DestroyImmediate(this);
-           
+            DestroyImmediate(instance);
+            instance = this;
         }
         else
         {
@@ -33,9 +33,12 @@ public class GameManager : MonoBehaviour {
 		
 	}
 
-    public void ReSpawnPlayer ()
+    public void ReSpawnPlayer(GameObject player)
     {
-
+        print("aye?2");
+        playerLives--;
+        player.GetComponent<SpriteRenderer>().enabled = true;
+        print("aye?3");
     }
 
 }

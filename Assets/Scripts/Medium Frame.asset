@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 647fab5fc0339ac4abcaca4acb2a05dd, type: 3}
+  m_Name: Medium Frame
+  m_EditorClassIdentifier: 
+  frameSize: 11.6
+  gapDistance: 0.75
+  comicFramePrefab: {fileID: 1341300595148836, guid: 71b83d49b645e974b90b4d13f7dd79d7,
+    type: 2}
+  rockSpawnAmount: 2

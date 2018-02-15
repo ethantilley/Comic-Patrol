@@ -2,11 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManagerScript : MonoBehaviour {
+public class GameManagerScript : MonoBehaviour
+{
 
     public int playerScore;
     public int playerLives;
 
+    public float flashTime = 0.5f;
+
+    // making this script be the only one to exist and making it accesable in other scripts without referance. 
     public static GameManagerScript instance;
 
     private void Awake()
@@ -24,21 +28,26 @@ public class GameManagerScript : MonoBehaviour {
 
 
     // Use this for initialization
-    void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
-    public void ReSpawnPlayer(GameObject player)
+    void Start()
     {
-        print("aye?2");
-        playerLives--;
-        player.GetComponent<SpriteRenderer>().enabled = true;
-        print("aye?3");
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
+    // called elsewhere when player needs to respawn, lose a life and also flashes the players sprite an momentarialy pauses game to show the player was hit.
+    public IEnumerator ReSpawnPlayer(SpriteRenderer playersRend)
+    {
+        --playerLives;
+        Time.timeScale = 0;
+        playersRend.enabled = false;
+        yield return new WaitForSecondsRealtime(flashTime);
+        Time.timeScale = 1;
+        playersRend.enabled = true;
+
     }
 
 }

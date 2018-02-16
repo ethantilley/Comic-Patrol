@@ -7,76 +7,68 @@ public class EnemyMovement : MonoBehaviour {
 
 	public float enemySpeed;
 
-	public float minX = 3, maxX = 15;
-	public float minY = 0.5f, maxY = 1.5f;
+	int waypointIndex = 0;
 
-	public enum aiState
-	{
-		MovingLeft,
-		MovingRight,
-		MovingUp,
-		MovingDown,
+	[SerializeField]
+	public Transform target;
 
-		Shoot
-	}
-	public aiState currState;
-	public Vector2 targetX;
-	public Vector2 startPos;
+	public float distanceFromPointAcceptable;
+	public Transform[] wayPoints;
+
+	public Transform wayPointHolder;
+	public Transform c;
+
+	public bool isMoving;
+
 		// Use this for initialization
-	void Start () {
-		currState = aiState.MovingLeft;
+	void Awake () {
+		
 
-		CheckStates ();
-	}
-	
-	// Update is called once per frame
-	void Update () {			
-			
-
-		if (transform.position.x == targetX.x) {
-			currState = aiState.MovingUp;
-			CheckStates ();
-		}
-
-			transform.position = Vector2.MoveTowards(transform.position, targetX, enemySpeed * Time.deltaTime);	
-
-		if (transform.position.y == targetX.y) {
-			currState = aiState.MovingRight;
-			CheckStates ();
+		wayPoints = new Transform[wayPointHolder.childCount];
+		for (int i = 0; i < wayPoints.Length; i++)
+		{
+			wayPoints[i] = wayPointHolder.GetChild(i);
 		}
 	}
 
-	void CheckStates ()
+	void Start()
 	{
-		//var randstate = (aiState)Random.Range(0,4);
-
-		switch (currState) {
-		case aiState.MovingLeft:
-			//currState = randstate;
-			startPos = transform.position;
-			float randXDist = Random.Range (minX, maxX);
-			targetX = new Vector2 (transform.position.x - randXDist, transform.position.y);
-			break;
-
-		case aiState.MovingRight:
-			//currState = randstate;
-			randXDist = Random.Range (minX, maxX);
-			targetX = startPos;		
-			break;
-
-
-		case aiState.MovingUp:
-
-			float randYDist = Random.Range (minY, maxY);
-			targetX = new Vector2 (transform.position.x, transform.position.y + randYDist);
-			break;
-
-		case aiState.MovingDown:
-
-			randYDist = Random.Range (minY, maxY);
-			targetX = new Vector2 (transform.position.x, transform.position.y - randYDist);
-			break;
-		}
+		target = wayPoints[0];
 	}
+
+	// Update is called once per frame
+	void Update () {
+
+		wayPointHolder.transform.position = new Vector2(c.position.x, c.position.y);
+
+
+		float distance = distanceFromPointAcceptable / 10;
+
+		if (isMoving) {
+			
+			Vector3 dir = target.position - transform.position;
+			transform.Translate (dir.normalized * enemySpeed * Time.deltaTime, Space.World);
+		}
+		// If within  units of the target pos,
+		if (Vector3.Distance(transform.position, target.position) <= distance)
+		{
+			// Get the ne waypoiont and move to it.
+			GetNextWaypoint();
+		}
+
+
+	}
+
+	void GetNextWaypoint()
+	{
+		if (waypointIndex == 3) {
+			waypointIndex = 0;
+		
+		}else	
+		++waypointIndex;
+		
+		target = wayPoints[waypointIndex];
+	}
+
 
 }

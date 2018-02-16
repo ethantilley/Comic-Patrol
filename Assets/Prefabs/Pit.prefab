@@ -9,22 +9,15 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-<<<<<<< HEAD
   m_RootGameObject: {fileID: 1119347561488130}
   m_IsPrefabParent: 1
 --- !u!1 &1119347561488130
-=======
-  m_RootGameObject: {fileID: 1412637939557538}
-  m_IsPrefabParent: 1
---- !u!1 &1412637939557538
->>>>>>> origin/master
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-<<<<<<< HEAD
   - component: {fileID: 4205589842975960}
   - component: {fileID: 61172973945553360}
   - component: {fileID: 114520867011136854}
@@ -33,59 +26,30 @@ GameObject:
   m_Layer: 0
   m_Name: Pit
   m_TagString: Untagged
-=======
-  - component: {fileID: 4693467827853326}
-  - component: {fileID: 212709474934476474}
-  - component: {fileID: 61597064418556008}
-  - component: {fileID: 50661026962511416}
-  - component: {fileID: 114348876042202514}
-  m_Layer: 0
-  m_Name: Pit
-  m_TagString: Obstacle
->>>>>>> origin/master
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
-<<<<<<< HEAD
 --- !u!4 &4205589842975960
-=======
---- !u!4 &4693467827853326
->>>>>>> origin/master
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-<<<<<<< HEAD
   m_GameObject: {fileID: 1119347561488130}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 13.75, y: -3.66, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-=======
-  m_GameObject: {fileID: 1412637939557538}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 13.55, y: -3.61, z: 0}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 1}
->>>>>>> origin/master
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-<<<<<<< HEAD
 --- !u!50 &50801646546486376
-=======
---- !u!50 &50661026962511416
->>>>>>> origin/master
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-<<<<<<< HEAD
   m_GameObject: {fileID: 1119347561488130}
-=======
-  m_GameObject: {fileID: 1412637939557538}
->>>>>>> origin/master
   m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
@@ -99,27 +63,18 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
-<<<<<<< HEAD
 --- !u!61 &61172973945553360
-=======
---- !u!61 &61597064418556008
->>>>>>> origin/master
 BoxCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-<<<<<<< HEAD
   m_GameObject: {fileID: 1119347561488130}
-=======
-  m_GameObject: {fileID: 1412637939557538}
->>>>>>> origin/master
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-<<<<<<< HEAD
   m_Offset: {x: -0.11200428, y: 0.007822752}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
@@ -127,56 +82,29 @@ BoxCollider2D:
     oldSize: {x: 0, y: 0}
     newSize: {x: 0, y: 0}
     adaptiveTilingThreshold: 0
-=======
-  m_Offset: {x: -0.033023834, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 19.2, y: 10.8}
-    newSize: {x: 19.2, y: 10.8}
-    adaptiveTilingThreshold: 0.5
->>>>>>> origin/master
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-<<<<<<< HEAD
   m_Size: {x: 0.77599144, y: 1.0156455}
   m_EdgeRadius: 0
 --- !u!114 &114520867011136854
-=======
-  m_Size: {x: 6.5966225, y: 10.8}
-  m_EdgeRadius: 0
---- !u!114 &114348876042202514
->>>>>>> origin/master
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-<<<<<<< HEAD
   m_GameObject: {fileID: 1119347561488130}
-=======
-  m_GameObject: {fileID: 1412637939557538}
->>>>>>> origin/master
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8106e200a9cef63419418b9ae72b4a39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-<<<<<<< HEAD
 --- !u!212 &212290890557575026
-=======
---- !u!212 &212709474934476474
->>>>>>> origin/master
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-<<<<<<< HEAD
   m_GameObject: {fileID: 1119347561488130}
-=======
-  m_GameObject: {fileID: 1412637939557538}
->>>>>>> origin/master
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -202,21 +130,13 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-<<<<<<< HEAD
   m_SortingOrder: 0
-=======
-  m_SortingOrder: 2
->>>>>>> origin/master
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-<<<<<<< HEAD
   m_Size: {x: 1, y: 1}
-=======
-  m_Size: {x: 19.2, y: 10.8}
->>>>>>> origin/master
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 0

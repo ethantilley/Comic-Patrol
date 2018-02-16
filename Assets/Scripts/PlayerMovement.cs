@@ -37,7 +37,7 @@ public class PlayerMovement : MonoBehaviour
             interp += jumpSpeed * Time.deltaTime;
         }
 
-        if (interp > 3)
+        if (interp > 1)
         {
             float temp = max;
             max = min;

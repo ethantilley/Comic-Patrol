@@ -5,18 +5,35 @@ using UnityEngine;
 public class SpawnManager : MonoBehaviour
 {
 
+    public GameObject endFrameObj;
+    public GameObject endLevelObj;
+
     public Transform rockSpawnPoint;
     public Transform pitSpawnPoint;
 
     public Transform spawnerPoint;
     public ComicFrame[] comicFrame;
+    public float stripGapDistance = 30f;
 
-    public int framePerStrip = 3;
+    public int framePerStrip = 2;
 
     int randFrame1;
     int randFrame2;
 
+    public static SpawnManager instance;
 
+    private void Awake()
+    {
+        if (instance != this)
+        {
+            DestroyImmediate(instance);
+            instance = this;
+        }
+        else
+        {
+            instance = this;
+        }
+    }
 
     /*
      * 
@@ -24,29 +41,49 @@ public class SpawnManager : MonoBehaviour
                  (spawnerPoint.transform.position.x + (((comicFrame[1].frameSize / 2) + (comicFrame[1].frameSize / 2)) + comicFrame[1].gapDistance), 0);
      */
 
+
     // Use this for initialization
     void Start()
     {
         // used for randomly choosing the differant comic frames.
-        randFrame1 = Random.Range(0, (comicFrame.Length));
-        randFrame2 = Random.Range(0, (comicFrame.Length));
-
-        // loops till i equals whatever  framePerStrip is set to
-        for (int i = 0; i < framePerStrip; i++)
+        
+        for (int x = 0; x < 4; x++)
         {
-            // spawns a prefab at the spawner points locaton
-            Instantiate(comicFrame[randFrame1].comicFramePrefab, spawnerPoint.transform.position, Quaternion.identity);
+            randFrame1 = Random.Range(0, (comicFrame.Length));
+            randFrame2 = Random.Range(0, (comicFrame.Length));
+            // loops till 'i' equals whatever  framePerStrip is set to
+            for (int i = 0; i < framePerStrip; i++)
+            {
+                // spawns a prefab at the spawner points locaton
+                Instantiate(comicFrame[randFrame1].comicFramePrefab, spawnerPoint.transform.position, Quaternion.identity);
 
-            // algorithm i made to hopefully calulate the distance for the spawnpoint to move to and spawn a comic frame
-            spawnerPoint.transform.position = new Vector2
-                   (spawnerPoint.transform.position.x + (((comicFrame[randFrame1].frameSize / 2) + (comicFrame[randFrame2].frameSize / 2)) + comicFrame[1].gapDistance), 0);
+                // algorithm i made to hopefully calulate the distance for the spawnpoint to move to and spawn a comic frame
+                spawnerPoint.transform.position = new Vector2
+                       (spawnerPoint.transform.position.x + (((comicFrame[randFrame1].frameSize / 2) + (comicFrame[randFrame2].frameSize / 2)) + comicFrame[1].gapDistance), spawnerPoint.position.y);
 
-            Instantiate(comicFrame[randFrame2].comicFramePrefab, spawnerPoint.transform.position, Quaternion.identity);
+                Instantiate(comicFrame[randFrame2].comicFramePrefab, spawnerPoint.transform.position, Quaternion.identity);
 
-            spawnerPoint.transform.position = new Vector2
-                   (spawnerPoint.transform.position.x + (((comicFrame[randFrame1].frameSize / 2) + (comicFrame[randFrame2].frameSize / 2)) + comicFrame[1].gapDistance), 0);
+                spawnerPoint.transform.position = new Vector2
+                       (spawnerPoint.transform.position.x + (((comicFrame[randFrame1].frameSize / 2) + (comicFrame[randFrame2].frameSize / 2)) + comicFrame[1].gapDistance), spawnerPoint.position.y);
 
+                if (i == 2 && x == 3)
+                {
+                    Instantiate(endLevelObj, spawnerPoint.position, Quaternion.identity);
+                    return;
+                }
 
+                if (i == 2)
+                {
+                    
+                   Instantiate(endFrameObj, spawnerPoint.transform.position, Quaternion.identity);
+
+                   spawnerPoint.transform.position = new Vector2(0, spawnerPoint.position.y - stripGapDistance);
+                   
+                }
+
+               
+
+            }
         }
 
     }

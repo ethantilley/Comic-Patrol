@@ -14,7 +14,7 @@ public class PlayerMovement : MonoBehaviour
     public float jumpSpeed = 2.5f;
     public bool jumping = false;
 
-    float min = -2.5f, max = -1.5f;
+    public float min = -2.5f, max= -1.5f;
     float interp = 0;
 
     // Use this for initialization
@@ -30,10 +30,10 @@ public class PlayerMovement : MonoBehaviour
         CheckInput();
 
         // lerps the player up and down using the min and max variables
-        transform.position = new Vector3(transform.position.x, Mathf.Lerp(min, max, interp), 0);
-
+      
         if (jumping)
         {
+            transform.position = new Vector3(transform.position.x, Mathf.Lerp(min, max, interp), 0);
             interp += jumpSpeed * Time.deltaTime;
         }
 
@@ -43,7 +43,7 @@ public class PlayerMovement : MonoBehaviour
             max = min;
             min = temp;
             interp = 0.0f;
-            if (temp < -1.5f)
+            if (temp < jumpHeight)
             {
                 jumping = false;
                 //Hack, player can inc speed.

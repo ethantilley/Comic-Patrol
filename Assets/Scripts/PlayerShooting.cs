@@ -18,6 +18,8 @@ public class PlayerShooting : MonoBehaviour
     float frontGunCooldown = 0;
     float topGunCooldown = 0;
 
+
+    public int bulletBurst = 4;
     // Use this for initialization
     void Start()
     {
@@ -64,10 +66,36 @@ public class PlayerShooting : MonoBehaviour
             if (topGunCooldown <= 0)
             {
                 topGunCooldown = 0;
-                ShootTop();
+                StartCoroutine(CoolDown());
             }
         }
     }
+
+    IEnumerator CoolDown ()
+    {
+       
+    
+            if (bulletBurst <= 0)
+            {
+            
+                yield return new WaitForSecondsRealtime(2f);
+            bulletBurst = 4;
+            }
+            else
+            {
+            
+            GameObject newBull = 
+            Instantiate(bullet, topShootPosition.transform.position, 
+            topShootPosition.transform.rotation);
+
+                Destroy(newBull, bulletLifeTime);
+                bullets.Add(newBull);
+                topGunCooldown = 0.35f;
+                --bulletBurst;
+            }
+              
+    }
+
     // called when the player wants to shoot and also if the cooldown for this gun has ended
     void ShootFront()
     {
@@ -81,9 +109,9 @@ public class PlayerShooting : MonoBehaviour
     // called when the player wants to shoot and also if the cooldown for this gun has ended
     void ShootTop()
     {
-        GameObject newBull = Instantiate(bullet, topShootPosition.transform.position, topShootPosition.transform.rotation);
-        Destroy(newBull, bulletLifeTime);
-        bullets.Add(newBull);
-        topGunCooldown = 0.5f;
+        //GameObject newBull = Instantiate(bullet, topShootPosition.transform.position, topShootPosition.transform.rotation);
+        //Destroy(newBull, bulletLifeTime);
+        //bullets.Add(newBull);
+        //topGunCooldown = 0.5f;
     }
 }

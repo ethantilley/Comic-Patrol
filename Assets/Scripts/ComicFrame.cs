@@ -10,7 +10,7 @@ public class ComicFrame : ScriptableObject
 
     public float frameSize;
     public float gapDistance;
-
+   
     public GameObject comicFramePrefab;
 
     public int rockSpawnAmount; //???

@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
-
+    public GameObject rock;
+    public GameObject[] enemys;
     public GameObject endFrameObj;
     public GameObject endLevelObj;
 
@@ -12,6 +13,7 @@ public class SpawnManager : MonoBehaviour
     public Transform pitSpawnPoint;
 
     public Transform spawnerPoint;
+ 
     public ComicFrame[] comicFrame;
     public float stripGapDistance = 30f;
 
@@ -35,13 +37,6 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
-    /*
-     * 
-        spawnerPoint.transform.position = new Vector2
-                 (spawnerPoint.transform.position.x + (((comicFrame[1].frameSize / 2) + (comicFrame[1].frameSize / 2)) + comicFrame[1].gapDistance), 0);
-     */
-
-
     // Use this for initialization
     void Start()
     {
@@ -57,11 +52,22 @@ public class SpawnManager : MonoBehaviour
                 // spawns a prefab at the spawner points locaton
                 Instantiate(comicFrame[randFrame1].comicFramePrefab, spawnerPoint.transform.position, Quaternion.identity);
 
+                if (i > 0)
+                {
+                    float randX = Random.Range(spawnerPoint.position.x - (comicFrame[randFrame1].frameSize / 1.8f), spawnerPoint.position.x + (comicFrame[randFrame1].frameSize / 1.8f));
+                    Instantiate(rock, new Vector2(randX, spawnerPoint.position.y - 3), Quaternion.identity);
+                }
                 // algorithm i made to hopefully calulate the distance for the spawnpoint to move to and spawn a comic frame
                 spawnerPoint.transform.position = new Vector2
                        (spawnerPoint.transform.position.x + (((comicFrame[randFrame1].frameSize / 2) + (comicFrame[randFrame2].frameSize / 2)) + comicFrame[1].gapDistance), spawnerPoint.position.y);
 
                 Instantiate(comicFrame[randFrame2].comicFramePrefab, spawnerPoint.transform.position, Quaternion.identity);
+
+                int randEnem = Random.Range(0, enemys.Length);
+                Instantiate(enemys[randEnem], spawnerPoint.position, Quaternion.identity);
+
+                float  randX2 = Random.Range(spawnerPoint.position.x - (comicFrame[randFrame1].frameSize / 1.8f), spawnerPoint.position.x + (comicFrame[randFrame1].frameSize / 1.8f));
+                Instantiate(rock, new Vector2(randX2, spawnerPoint.position.y - 3), Quaternion.identity);
 
                 spawnerPoint.transform.position = new Vector2
                        (spawnerPoint.transform.position.x + (((comicFrame[randFrame1].frameSize / 2) + (comicFrame[randFrame2].frameSize / 2)) + comicFrame[1].gapDistance), spawnerPoint.position.y);
@@ -74,15 +80,9 @@ public class SpawnManager : MonoBehaviour
 
                 if (i == 2)
                 {
-                    
                    Instantiate(endFrameObj, spawnerPoint.transform.position, Quaternion.identity);
-
                    spawnerPoint.transform.position = new Vector2(0, spawnerPoint.position.y - stripGapDistance);
-                   
                 }
-
-               
-
             }
         }
 

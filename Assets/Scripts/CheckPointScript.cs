@@ -10,6 +10,7 @@ public class CheckPointScript : MonoBehaviour {
     {
         if (coll.gameObject.CompareTag("Player"))
         {
+            coll.transform.position = new Vector2(coll.transform.position.x, coll.GetComponent<PlayerMovement>().min);
             if (!endLevelOnColl)
             {
                 
@@ -25,6 +26,7 @@ public class CheckPointScript : MonoBehaviour {
 
     void ChangeJumpBounds(PlayerMovement player)
     {
+        
         player.jumping = false;
         if (endLevelOnColl)
         {

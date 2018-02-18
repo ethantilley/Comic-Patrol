@@ -18,11 +18,12 @@ public class EnemyMovement : MonoBehaviour {
     public Transform c;
 
     public bool isMoving;
-
+    Transform player;
     // Use this for initialization
     void Awake()
     {
-
+        wayPointHolder = GameObject.Find("WayPointHolder").transform;
+        c = GameObject.Find("Main Camera").transform;
 
         wayPoints = new Transform[wayPointHolder.childCount];
         for (int i = 0; i < wayPoints.Length; i++)
@@ -33,21 +34,35 @@ public class EnemyMovement : MonoBehaviour {
 
     void Start()
     {
+        player = GameObject.Find("Player").transform;
+        isMoving = false;
         target = wayPoints[0];
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (player != null)
+        {
+            float distFromPlyr = Vector2.Distance(player.position, transform.position);
+
+            if (distFromPlyr < 6)
+            {
+                isMoving = true;
+            }
+
+        }
+        if (!isMoving)
+            return;
+
+
 
         wayPointHolder.transform.position = new Vector2(c.position.x, c.position.y);
-
 
         float distance = distanceFromPointAcceptable / 10;
 
         if (isMoving)
         {
-
             Vector3 dir = target.position - transform.position;
             transform.Translate(dir.normalized * enemySpeed * Time.deltaTime, Space.World);
         }

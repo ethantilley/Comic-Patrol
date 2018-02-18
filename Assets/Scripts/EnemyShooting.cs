@@ -22,7 +22,7 @@ public class EnemyShooting : MonoBehaviour {
     public IEnumerator GunTimer ()
     {
         int amtToShoot = Random.Range(1, 3);
-        print(amtToShoot);
+       
         yield return new WaitForSecondsRealtime(cooldown);
         if (amtToShoot > 1)
         {

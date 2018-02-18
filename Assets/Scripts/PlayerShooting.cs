@@ -83,7 +83,7 @@ public class PlayerShooting : MonoBehaviour
             }
             else
             {
-            
+            AudioManager.instance.PlaySound("PLshot");
             GameObject newBull = 
             Instantiate(bullet, topShootPosition.transform.position, 
             topShootPosition.transform.rotation);
@@ -99,6 +99,7 @@ public class PlayerShooting : MonoBehaviour
     // called when the player wants to shoot and also if the cooldown for this gun has ended
     void ShootFront()
     {
+        AudioManager.instance.PlaySound("PLshot");
         GameObject newBull = Instantiate(bullet, frontShootPosition.transform.position, frontShootPosition.transform.rotation);
 
         Destroy(newBull, bulletLifeTime);

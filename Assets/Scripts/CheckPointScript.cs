@@ -10,10 +10,11 @@ public class CheckPointScript : MonoBehaviour {
     {
         if (coll.gameObject.CompareTag("Player"))
         {
-            coll.transform.position = new Vector2(coll.transform.position.x, coll.GetComponent<PlayerMovement>().min);
+        
+//            coll.transform.position = new Vector2(coll.transform.position.x, coll.GetComponent<PlayerMovement>().min);
             if (!endLevelOnColl)
             {
-                
+                AudioManager.instance.PlaySound("PLStripOver");
                 coll.gameObject.transform.position = new Vector2(0, coll.gameObject.transform.position.y - SpawnManager.instance.stripGapDistance);
             }
             else
@@ -27,7 +28,8 @@ public class CheckPointScript : MonoBehaviour {
     void ChangeJumpBounds(PlayerMovement player)
     {
         
-        player.jumping = false;
+        if(player.jumping == false)
+            player.transform.position = new Vector2(player.transform.position.x, player.min);
         if (endLevelOnColl)
         {
             player.min = -2.5f;

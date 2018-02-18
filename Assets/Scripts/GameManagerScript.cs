@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManagerScript : MonoBehaviour
 {
@@ -30,17 +31,22 @@ public class GameManagerScript : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-
+        Time.timeScale = 1;
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+         
+        }
     }
     // called elsewhere when player needs to respawn, lose a life and also flashes the players sprite an momentarialy pauses game to show the player was hit.
     public IEnumerator ReSpawnPlayer(SpriteRenderer playersRend)
     {
+        AudioManager.instance.PlaySound("PLtakeDmg");
         --playerLives;
         Time.timeScale = 0;
         playersRend.enabled = false;

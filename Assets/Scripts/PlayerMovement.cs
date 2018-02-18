@@ -78,4 +78,13 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.RightArrow))
             currentSpeed = baseSpeed;
     }
+
+    private void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.gameObject.CompareTag("EnemyBullet"))
+        {
+           StartCoroutine(GameManagerScript.instance.ReSpawnPlayer(GetComponent<SpriteRenderer>()));
+        }
+    }
+
 }

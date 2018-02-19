@@ -16,16 +16,17 @@ public class Obstacle : MonoBehaviour {
     // checking collisions with the player and bullet.
     private void OnTriggerEnter2D(Collider2D coll)
     {
-        gameObject.GetComponent<SpriteRenderer>().enabled = false;
+        
         if (coll.gameObject.CompareTag("Bullet"))
         {
+            gameObject.GetComponent<SpriteRenderer>().enabled = false;
             Destroy(coll.gameObject);
             Destroy(gameObject);
         }
 
         if (coll.gameObject.CompareTag("Player"))
         {
-        
+            gameObject.GetComponent<SpriteRenderer>().enabled = false;
             if (GameManagerScript.instance.playerLives > 0)
             {
               

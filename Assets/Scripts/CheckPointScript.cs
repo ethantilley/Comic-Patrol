@@ -23,6 +23,8 @@ public class CheckPointScript : MonoBehaviour {
         if (endLevelOnColl)
         {
             player.transform.position = new Vector2(0, -2.5f);
+            CameraMovement.instance.transform.position = new Vector3(0,0, CameraMovement.instance.transform.position.z);
+
 
             player.min = -2.5f;
             player.max = player.min + 1;
@@ -32,6 +34,7 @@ public class CheckPointScript : MonoBehaviour {
         {
             AudioManager.instance.PlaySound("PLStripOver");
             player.transform.position = new Vector2(0, player.transform.position.y - SpawnManager.instance.stripGapDistance);
+            CameraMovement.instance.transform.position = new Vector3(CameraMovement.instance.transform.position.x, CameraMovement.instance.transform.position.y - SpawnManager.instance.stripGapDistance, CameraMovement.instance.transform.position.z);
             player.min -= SpawnManager.instance.stripGapDistance;
             player.max = player.min + 1;
             player.jumpHeight -= SpawnManager.instance.stripGapDistance;

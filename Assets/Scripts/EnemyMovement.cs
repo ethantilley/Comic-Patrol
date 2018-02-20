@@ -6,7 +6,7 @@ public class EnemyMovement : MonoBehaviour {
 
     public float enemySpeed;
 
-    int waypointIndex = 0;
+    public int waypointIndex = 0;
 
     [SerializeField]
     public Transform target;
@@ -14,6 +14,7 @@ public class EnemyMovement : MonoBehaviour {
     public float distanceFromPointAcceptable;
     public Transform[] wayPoints;
 
+    public GameObject[] holders;
     public Transform wayPointHolder;
     public Transform c;
 
@@ -22,7 +23,9 @@ public class EnemyMovement : MonoBehaviour {
     // Use this for initialization
     void Awake()
     {
-        wayPointHolder = GameObject.Find("WayPointHolder").transform;
+        
+        holders = GameObject.FindGameObjectsWithTag("WayPointHolder");
+        wayPointHolder = holders[Random.Range(0, holders.Length)].transform;
         c = GameObject.Find("Main Camera").transform;
 
         wayPoints = new Transform[wayPointHolder.childCount];
@@ -50,14 +53,18 @@ public class EnemyMovement : MonoBehaviour {
             {
                 isMoving = true;
             }
+            else
+            {
+               // isMoving = false;
+            }
 
         }
         if (!isMoving)
             return;
 
 
-
-        wayPointHolder.transform.position = new Vector2(c.position.x, c.position.y);
+        //foreach (var item in holders)
+        //item.transform.position = new Vector2(c.position.x, c.position.y);
 
         float distance = distanceFromPointAcceptable / 10;
 
@@ -76,11 +83,26 @@ public class EnemyMovement : MonoBehaviour {
 
     }
 
+    void GetNextPointHolder()
+    {
+        wayPointHolder = holders[Random.Range(0, holders.Length)].transform;
+        
+        wayPoints = new Transform[wayPointHolder.childCount];
+        for (int i = 0; i < wayPoints.Length; i++)
+        {
+            wayPoints[i] = wayPointHolder.GetChild(i);
+        }
+
+        target = wayPoints[0];
+    }
+
     void GetNextWaypoint()
     {
         if (waypointIndex == 3)
         {
+            print("Finished waypoints");
             waypointIndex = 0;
+            GetNextPointHolder();
 
         }
         else

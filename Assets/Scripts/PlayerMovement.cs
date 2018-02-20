@@ -8,14 +8,16 @@ public class PlayerMovement : MonoBehaviour
     public float baseSpeed = 5;
     public float currentSpeed = 5;
     public float changeSpeedPercent = 0.5f;
-
-
     public float jumpHeight = 1f;
     public float jumpSpeed = 2.5f;
+
     public bool jumping = false;
+    public bool moving = true;
 
     public float min = -2.5f, max= -1.5f;
     float interp = 0;
+
+    public Animator anim;
 
     // Use this for initialization
     void Start()
@@ -26,6 +28,7 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(moving)
         ConsistentMove();
         CheckInput();
 
@@ -33,21 +36,27 @@ public class PlayerMovement : MonoBehaviour
       
         if (jumping)
         {
+            
             transform.position = new Vector3(transform.position.x, Mathf.Lerp(min, max, interp), 0);
             interp += jumpSpeed * Time.deltaTime;
+          
         }
 
         if (interp > 1)
         {
+            print("falling...");
+            anim.SetBool("Jumping", false);
             float temp = max;
             max = min;
             min = temp;
             interp = 0.0f;
             if (temp < jumpHeight)
             {
+                anim.SetBool("touchingGround", true);
                 jumping = false;
                 //Hack, player can inc speed.
-            }
+            }else
+                anim.SetBool("touchingGround", false);
         }
 
     }
@@ -63,6 +72,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.UpArrow) && !jumping)
         {
+            anim.SetBool("Jumping", true);
             jumping = true;
             return;
         }

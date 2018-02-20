@@ -149,9 +149,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemySpeed: 5
+  waypointIndex: 0
   target: {fileID: 0}
-  distanceFromPointAcceptable: 0.2
+  distanceFromPointAcceptable: 2
   wayPoints: []
+  holders: []
   wayPointHolder: {fileID: 0}
   c: {fileID: 0}
   isMoving: 0

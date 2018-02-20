@@ -10,7 +10,9 @@ public class GameManagerScript : MonoBehaviour
     public int playerLives;
 
     public float flashTime = 0.5f;
-
+    public float immunityTime = 2;
+    public bool playerImmunity = false;
+    GameObject player;
     // making this script be the only one to exist and making it accesable in other scripts without referance. 
     public static GameManagerScript instance;
 
@@ -25,6 +27,9 @@ public class GameManagerScript : MonoBehaviour
         {
             instance = this;
         }
+
+        player = GameObject.Find("Player");
+
     }
 
 
@@ -37,6 +42,18 @@ public class GameManagerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if (playerImmunity && immunityTime > 0)
+        {
+
+            player.GetComponent<BoxCollider2D>().enabled = false;       
+            immunityTime -= Time.deltaTime;
+        }
+        else {
+            player.GetComponent<BoxCollider2D>().enabled = true;
+            playerImmunity = false;
+        }
+
         if (Input.GetKeyDown(KeyCode.R))
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
@@ -46,6 +63,9 @@ public class GameManagerScript : MonoBehaviour
     // called elsewhere when player needs to respawn, lose a life and also flashes the players sprite an momentarialy pauses game to show the player was hit.
     public IEnumerator ReSpawnPlayer(SpriteRenderer playersRend)
     {
+        
+        playerImmunity = true;
+        immunityTime = 1.8f;
         AudioManager.instance.PlaySound("PLtakeDmg");
         --playerLives;
         Time.timeScale = 0;
@@ -53,6 +73,7 @@ public class GameManagerScript : MonoBehaviour
         yield return new WaitForSecondsRealtime(flashTime);
         Time.timeScale = 1;
         playersRend.enabled = true;
+       
 
     }
 

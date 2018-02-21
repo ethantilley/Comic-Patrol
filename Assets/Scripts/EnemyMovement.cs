@@ -116,6 +116,8 @@ public class EnemyMovement : MonoBehaviour {
        
         if (coll.gameObject.CompareTag("Bullet"))
         {
+            GameManagerScript.instance.ChangeScore(100);
+
             Destroy(coll.gameObject);
             Destroy(gameObject);
         }

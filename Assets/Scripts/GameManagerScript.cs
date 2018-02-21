@@ -7,6 +7,8 @@ public class GameManagerScript : MonoBehaviour
 {
 
     public int playerScore;
+    public float timeBetweenReward = 30; 
+
     public int playerLives;
 
     public float flashTime = 0.5f;
@@ -32,6 +34,11 @@ public class GameManagerScript : MonoBehaviour
 
     }
 
+    IEnumerator ScoreReward ()
+    {
+        yield return new WaitForSeconds(timeBetweenReward);
+        ChangeScore(50);
+    }
 
     // Use this for initialization
     void Start()
@@ -60,10 +67,17 @@ public class GameManagerScript : MonoBehaviour
          
         }
     }
+
+    public void ChangeScore(int _AmtToChange)
+    {
+        playerScore += _AmtToChange;
+    }
+
     // called elsewhere when player needs to respawn, lose a life and also flashes the players sprite an momentarialy pauses game to show the player was hit.
     public IEnumerator ReSpawnPlayer(SpriteRenderer playersRend)
     {
-        
+        ChangeScore(-50);
+
         playerImmunity = true;
         immunityTime = 1.8f;
         AudioManager.instance.PlaySound("PLtakeDmg");

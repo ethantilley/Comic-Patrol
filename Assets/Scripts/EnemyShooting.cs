@@ -41,11 +41,16 @@ public class EnemyShooting : MonoBehaviour {
 
     void Shoot()
     {
-        GameObject newBullet = Instantiate(enemyBulletPrefab, firePos.position, enemyBulletPrefab.transform.rotation);
-        enemBullets.Add(newBullet);
+        if (GetComponent<EnemyMovement>().isMoving)
+        {
+            AudioManager.instance.PlaySound("enemShot");
+
+            GameObject newBullet = Instantiate(enemyBulletPrefab, firePos.position, enemyBulletPrefab.transform.rotation);
+            enemBullets.Add(newBullet);
 
 
-        Destroy(newBullet, enemBulletLifeTime);
+            Destroy(newBullet, enemBulletLifeTime);
+        }
     }
 
     private void Update()

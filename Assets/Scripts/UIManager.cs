@@ -7,6 +7,7 @@ public class UIManager : MonoBehaviour
 {
 
     public Text livesText;
+    public Text scoreText;
 
     // Use this for initialization
     void Start()
@@ -18,5 +19,6 @@ public class UIManager : MonoBehaviour
     void Update()
     {
         livesText.text = GameManagerScript.instance.playerLives.ToString();
+        scoreText.text = GameManagerScript.instance.playerScore.ToString();
     }
 }

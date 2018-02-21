@@ -19,6 +19,7 @@ public class Obstacle : MonoBehaviour {
         
         if (coll.gameObject.CompareTag("Bullet"))
         {
+            GameManagerScript.instance.ChangeScore(100);
             gameObject.GetComponent<SpriteRenderer>().enabled = false;
             Destroy(coll.gameObject);
             Destroy(gameObject);

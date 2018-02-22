@@ -14,17 +14,13 @@ public class PlayerShooting : MonoBehaviour
 
     public float bulletSpeed;
     public float bulletLifeTime = 2;
+    public float reloadTime = 1.5f;
 
     float frontGunCooldown = 0;
     float topGunCooldown = 0;
 
 
     public int bulletBurst = 4;
-    // Use this for initialization
-    void Start()
-    {
-
-    }
 
     // Update is called once per frame
     void Update()
@@ -71,29 +67,31 @@ public class PlayerShooting : MonoBehaviour
         }
     }
 
-    IEnumerator CoolDown ()
+    IEnumerator CoolDown()
     {
-       
-    
-            if (bulletBurst <= 0)
-            {
-            
-                yield return new WaitForSecondsRealtime(2f);
-            bulletBurst = 4;
-            }
-            else
-            {
-            AudioManager.instance.PlaySound("shot");
-            GameObject newBull = 
-            Instantiate(bullet, topShootPosition.transform.position, 
-            topShootPosition.transform.rotation);
 
-                Destroy(newBull, bulletLifeTime);
-                bullets.Add(newBull);
-                topGunCooldown = 0.35f;
-                --bulletBurst;
-            }
-              
+        // check to see if the player has used up its bullets and its time for a larger cooldown
+        if (bulletBurst <= 0)
+        {
+
+            yield return new WaitForSecondsRealtime(reloadTime);
+            bulletBurst = 4;
+        }
+        else
+        {
+            // runs a function in the game manager to play the gunshot sound
+            AudioManager.instance.PlaySound("shot");
+            //spawns bullet
+            GameObject newBull =
+            Instantiate(bullet, topShootPosition.transform.position,
+            topShootPosition.transform.rotation);
+            // destroys it after a set amount of time.
+            Destroy(newBull, bulletLifeTime);
+            bullets.Add(newBull);
+            topGunCooldown = 0.35f;
+            --bulletBurst;
+        }
+
     }
 
     // called when the player wants to shoot and also if the cooldown for this gun has ended

@@ -21,6 +21,7 @@ public class EnemyShooting : MonoBehaviour {
 	
     public IEnumerator GunTimer ()
     {
+        // runs an random chance for the enemy to spawn more than just one bullet
         int amtToShoot = Random.Range(1, 3);
        
         yield return new WaitForSecondsRealtime(cooldown);
@@ -41,8 +42,9 @@ public class EnemyShooting : MonoBehaviour {
 
     void Shoot()
     {
-        if (GetComponent<EnemyMovement>().isMoving)
-        {
+        if (!GetComponent<EnemyMovement>().isActive)
+            return;
+
             AudioManager.instance.PlaySound("enemShot");
 
             GameObject newBullet = Instantiate(enemyBulletPrefab, firePos.position, enemyBulletPrefab.transform.rotation);
@@ -50,16 +52,17 @@ public class EnemyShooting : MonoBehaviour {
 
 
             Destroy(newBullet, enemBulletLifeTime);
-        }
+        
     }
 
     private void Update()
     {
+        // loops through the bullets and movmes them.
         for (int i = 0; i < enemBullets.Count; i++)
         {
             if (enemBullets[i] != null)
             {
-                enemBullets[i].transform.parent = transform;
+               // enemBullets[i].transform.parent = transform;
                 enemBullets[i].transform.Translate((Vector3.right * bulletSpeed) * Time.deltaTime);
             }
             else

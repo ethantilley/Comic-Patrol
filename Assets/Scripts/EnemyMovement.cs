@@ -16,30 +16,19 @@ public class EnemyMovement : MonoBehaviour {
 
     public GameObject[] holders;
     public Transform wayPointHolder;
-    public Transform c;
+    public Transform cam;
 
-    public bool isMoving;
+    public bool isActive;
     Transform player;
     // Use this for initialization
-    void Awake()
-    {
-        
-        holders = GameObject.FindGameObjectsWithTag("WayPointHolder");
-        wayPointHolder = holders[Random.Range(0, holders.Length)].transform;
-        c = GameObject.Find("Main Camera").transform;
-
-        wayPoints = new Transform[wayPointHolder.childCount];
-        for (int i = 0; i < wayPoints.Length; i++)
-        {
-            wayPoints[i] = wayPointHolder.GetChild(i);
-        }
-    }
 
     void Start()
     {
+        cam = GameObject.Find("Main Camera").transform;
+        GetNextPointHolder();
         player = GameObject.Find("Player").transform;
-        isMoving = false;
-        target = wayPoints[0];
+        isActive = false;
+       
     }
 
     // Update is called once per frame
@@ -47,19 +36,21 @@ public class EnemyMovement : MonoBehaviour {
     {
         if (player != null)
         {
+            // checks the distance it's from the player and changes is status 
             float distFromPlyr = Vector2.Distance(player.position, transform.position);
 
+           
             if (distFromPlyr < 6)
             {
-                isMoving = true;
+                isActive = true;
             }
-            else
+            else if (distFromPlyr > 10)
             {
-               // isMoving = false;
+                isActive = false;
             }
 
         }
-        if (!isMoving)
+        if (!isActive)
             return;
 
 
@@ -68,7 +59,7 @@ public class EnemyMovement : MonoBehaviour {
 
         float distance = distanceFromPointAcceptable / 10;
 
-        if (isMoving)
+        if (isActive)
         {
             Vector3 dir = target.position - transform.position;
             transform.Translate(dir.normalized * enemySpeed * Time.deltaTime, Space.World);
@@ -82,7 +73,7 @@ public class EnemyMovement : MonoBehaviour {
 
 
     }
-
+    // called when the enemy finishes a waypoint section and moves onto the next section
     void GetNextPointHolder()
     {
         wayPointHolder = holders[Random.Range(0, holders.Length)].transform;
@@ -90,14 +81,16 @@ public class EnemyMovement : MonoBehaviour {
         wayPoints = new Transform[wayPointHolder.childCount];
         for (int i = 0; i < wayPoints.Length; i++)
         {
+            // assigns the waypoints child to the randomly selected holder
             wayPoints[i] = wayPointHolder.GetChild(i);
         }
-
+        // sets the enemys target the waypoints
         target = wayPoints[0];
     }
 
     void GetNextWaypoint()
     {
+        // check to see if the enemy nees to move to the next holder
         if (waypointIndex == 3)
         {
             print("Finished waypoints");

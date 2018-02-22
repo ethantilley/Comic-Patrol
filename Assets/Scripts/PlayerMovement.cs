@@ -14,10 +14,12 @@ public class PlayerMovement : MonoBehaviour
     public bool jumping = false;
     public bool moving = true;
 
-    public float min = -2.5f, max= -1.5f;
+    public float min = -2.5f, max = -1.5f;
     float interp = 0;
 
     public Animator anim;
+    private float maxSpeed = 7.5f;
+    private float minSpeed = 2.5f;
 
     // Use this for initialization
     void Start()
@@ -28,23 +30,23 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(moving)
-        ConsistentMove();
+        if (moving)
+            ConsistentMove();
         CheckInput();
 
-        // lerps the player up and down using the min and max variables
-      
+       
+
         if (jumping)
         {
-            
+            // lerps the player up and down using the min and max variables
             transform.position = new Vector3(transform.position.x, Mathf.Lerp(min, max, interp), 0);
             interp += jumpSpeed * Time.deltaTime;
-          
+
         }
 
         if (interp > 1)
         {
-            print("falling...");
+            
             anim.SetBool("Jumping", false);
             float temp = max;
             max = min;
@@ -52,11 +54,21 @@ public class PlayerMovement : MonoBehaviour
             interp = 0.0f;
             if (temp < jumpHeight)
             {
-                anim.SetBool("touchingGround", true);
+               
                 jumping = false;
+                currentSpeed = baseSpeed;
                 //Hack, player can inc speed.
-            }else
-                anim.SetBool("touchingGround", false);
+            }
+            // stoping the speed from ever going too high
+            if (currentSpeed > maxSpeed)
+            {
+                currentSpeed = maxSpeed;
+            }
+            else if (currentSpeed < minSpeed)
+            {
+                currentSpeed = minSpeed;
+            }
+               
         }
 
     }
@@ -74,26 +86,27 @@ public class PlayerMovement : MonoBehaviour
         {
             anim.SetBool("Jumping", true);
             jumping = true;
-            return;
-        }
 
+        }
+        if (jumping)
+            return;
         // changeing the current speed by taking away or adding a percentage
         if (Input.GetKeyDown(KeyCode.LeftArrow))
             currentSpeed -= (baseSpeed * changeSpeedPercent);
         if (Input.GetKeyUp(KeyCode.LeftArrow))
-            currentSpeed = baseSpeed;
+            currentSpeed = (baseSpeed);
 
         if (Input.GetKeyDown(KeyCode.RightArrow))
             currentSpeed += (baseSpeed * changeSpeedPercent);
         if (Input.GetKeyUp(KeyCode.RightArrow))
-            currentSpeed = baseSpeed;
+            currentSpeed = (baseSpeed);
     }
 
     private void OnTriggerEnter2D(Collider2D col)
     {
         if (col.gameObject.CompareTag("EnemyBullet"))
         {
-           StartCoroutine(GameManagerScript.instance.ReSpawnPlayer(GetComponent<SpriteRenderer>()));
+            StartCoroutine(GameManagerScript.instance.ReSpawnPlayer(GetComponent<SpriteRenderer>()));
         }
     }
 

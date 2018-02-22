@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AudioManager : MonoBehaviour {
+public class AudioManager : MonoBehaviour
+{
     public List<AudioClip> sfx = new List<AudioClip>();
 
     public AudioSource source;
@@ -23,7 +24,7 @@ public class AudioManager : MonoBehaviour {
         }
     }
 
-
+    // loops though tthe sound in a list to see if the name matches the name that was passed through the function when called 
     public void PlaySound(string _Sound)
     {
 
@@ -35,9 +36,9 @@ public class AudioManager : MonoBehaviour {
                 return;
             }
         }
+        // if no sound found with that name.
+        Debug.LogError("Error 404, Sound Not Found");
 
-               Debug.LogError("Error 404, Sound Not Found");
-             
-       
+
     }
 }

@@ -22,10 +22,10 @@ public class CheckPointScript : MonoBehaviour {
             return;
         if (endLevelOnColl)
         {
+            SpawnManager.instance.SpawnMap();
             player.transform.position = new Vector2(0, -2.5f);
             CameraMovement.instance.transform.position = new Vector3(0,0, CameraMovement.instance.transform.position.z);
-
-
+            
             player.min = -2.5f;
             player.max = player.min + 1;
             player.jumpHeight = -1.5f;

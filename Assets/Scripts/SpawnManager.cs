@@ -13,7 +13,7 @@ public class SpawnManager : MonoBehaviour
     public Transform pitSpawnPoint;
 
     public Transform spawnerPoint;
- 
+
     public ComicFrame[] comicFrame;
     public float stripGapDistance = 30f;
 
@@ -40,8 +40,13 @@ public class SpawnManager : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        SpawnMap();
+    }
+
+    public void SpawnMap()
+    {
         // used for randomly choosing the differant comic frames.
-        
+
         for (int x = 0; x < 4; x++)
         {
             randFrame1 = Random.Range(0, (comicFrame.Length));
@@ -66,7 +71,7 @@ public class SpawnManager : MonoBehaviour
                 int randEnem = Random.Range(0, enemys.Length);
                 Instantiate(enemys[randEnem], spawnerPoint.position, Quaternion.identity);
 
-                float  randX2 = Random.Range(spawnerPoint.position.x - (comicFrame[randFrame1].frameSize / 2.1f), spawnerPoint.position.x + (comicFrame[randFrame1].frameSize / 2.1f));
+                float randX2 = Random.Range(spawnerPoint.position.x - (comicFrame[randFrame1].frameSize / 2.1f), spawnerPoint.position.x + (comicFrame[randFrame1].frameSize / 2.1f));
                 Instantiate(rock, new Vector2(randX2, spawnerPoint.position.y - 3), Quaternion.identity);
 
                 spawnerPoint.transform.position = new Vector2
@@ -80,8 +85,8 @@ public class SpawnManager : MonoBehaviour
 
                 if (i == 2)
                 {
-                   Instantiate(endFrameObj, spawnerPoint.transform.position, Quaternion.identity);
-                   spawnerPoint.transform.position = new Vector2(0, spawnerPoint.position.y - stripGapDistance);
+                    Instantiate(endFrameObj, spawnerPoint.transform.position, Quaternion.identity);
+                    spawnerPoint.transform.position = new Vector2(0, spawnerPoint.position.y - stripGapDistance);
                 }
             }
         }

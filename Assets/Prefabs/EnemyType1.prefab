@@ -152,7 +152,7 @@ MonoBehaviour:
   cooldown: 2
   fireRate: 0.2
   bulletSpeed: 4
-  enemBulletLifeTime: 1
+  enemBulletLifeTime: 3
   enemyBulletPrefab: {fileID: 1222735275552590, guid: 83872e9eb4ead1c43ba566c793a93db6,
     type: 2}
   firePos: {fileID: 4750779474160396}

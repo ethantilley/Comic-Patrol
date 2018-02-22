@@ -52,7 +52,6 @@ public class GameManagerScript : MonoBehaviour
 
         if (playerImmunity && immunityTime > 0)
         {
-
             player.GetComponent<BoxCollider2D>().enabled = false;       
             immunityTime -= Time.deltaTime;
         }

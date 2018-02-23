@@ -23,7 +23,7 @@ public class CheckPointScript : MonoBehaviour {
         if (endLevelOnColl)
         {
             SpawnManager.instance.SpawnMap();
-            player.transform.position = new Vector2(0, -2.5f);
+            player.transform.position = new Vector2(0, player.min);
             CameraMovement.instance.transform.position = new Vector3(0,0, CameraMovement.instance.transform.position.z);
             
             player.min = -2.5f;

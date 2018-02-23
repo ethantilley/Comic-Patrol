@@ -39,7 +39,7 @@ public class Obstacle : MonoBehaviour
             else
             {
                 AudioManager.instance.PlaySound("PLDeath");
-                Time.timeScale = 0;
+                GameManagerScript.instance.DeathState();
             }
             Destroy(gameObject, 1);
         }

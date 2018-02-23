@@ -24,6 +24,7 @@ public class EnemyMovement : MonoBehaviour {
 
     void Start()
     {
+        holders = GameObject.FindGameObjectsWithTag("WayPointHolder");
         cam = GameObject.Find("Main Camera").transform;
         GetNextPointHolder();
         player = GameObject.Find("Player").transform;

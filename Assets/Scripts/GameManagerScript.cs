@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class GameManagerScript : MonoBehaviour
 {
 
-    public int playerScore;
+    public int playerScore, highScore;
     public float timeBetweenReward = 30; 
 
     public int playerLives;
@@ -43,7 +43,22 @@ public class GameManagerScript : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        highScore = PlayerPrefs.GetInt("highScore", 0);
         Time.timeScale = 1;
+
+    }
+
+    public void SaveHighScore()
+    {
+        PlayerPrefs.SetInt("highScore", Mathf.Max(highScore, playerScore));
+    }
+
+    public void DeathState()
+    {
+        SaveHighScore();
+        UIManager.instance.DisplayEndGameStats();
+        player.GetComponent<PlayerMovement>().moving = false;
+        player.GetComponent<BoxCollider2D>().enabled = false;
     }
 
     // Update is called once per frame
@@ -58,6 +73,10 @@ public class GameManagerScript : MonoBehaviour
         else {
             player.GetComponent<BoxCollider2D>().enabled = true;
             playerImmunity = false;
+        }
+        if (playerLives <= 0)
+        {
+            DeathState();
         }
 
         if (Input.GetKeyDown(KeyCode.R))

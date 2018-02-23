@@ -1144,6 +1144,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb7d3e2b2874fcd4aba75528eba25afd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelItems: []
   rock: {fileID: 1122777491720090, guid: ffb197c43914887498cd15f427f16c75, type: 2}
   enemys:
   - {fileID: 1261856146418514, guid: 9df720446fdd1434585f5855aacdff06, type: 2}

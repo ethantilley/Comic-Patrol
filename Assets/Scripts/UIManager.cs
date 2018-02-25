@@ -17,6 +17,8 @@ public class UIManager : MonoBehaviour
 
     public static UIManager instance;
 
+    public GameObject splash;
+
     // Use this for Before initialization
     void Awake()
     {
@@ -33,6 +35,20 @@ public class UIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (splash.activeInHierarchy)
+        {
+            if (Input.anyKeyDown)
+            {
+                splash.SetActive(false);
+            }
+            Time.timeScale = 0;
+        }
+        else
+        {
+            Time.timeScale = 1;
+        }
+
+
         livesText.text = "Lives: " + GameManagerScript.instance.playerLives.ToString();
         scoreText.text = "Score: " + GameManagerScript.instance.playerScore.ToString();
 

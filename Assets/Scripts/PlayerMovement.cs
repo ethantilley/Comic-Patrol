@@ -30,11 +30,14 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (moving)
-            ConsistentMove();
         CheckInput();
 
-       
+    }
+    void FixedUpdate()
+    {
+
+        if (moving)
+            ConsistentMove();
 
         if (jumping)
         {
@@ -56,7 +59,7 @@ public class PlayerMovement : MonoBehaviour
             {
                
                 jumping = false;
-                currentSpeed = baseSpeed;
+                //currentSpeed = baseSpeed;
                 //Hack, player can inc speed.
             }
             // stoping the speed from ever going too high

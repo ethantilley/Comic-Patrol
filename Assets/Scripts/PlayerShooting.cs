@@ -12,8 +12,7 @@ public class PlayerShooting : MonoBehaviour
 
     public List<GameObject> bullets = new List<GameObject>();
 
-    public float bulletSpeed;
-    public float bulletLifeTime = 2;
+   
     public float reloadTime = 1.5f;
 
     float frontGunCooldown = 0;
@@ -31,13 +30,13 @@ public class PlayerShooting : MonoBehaviour
 
     void MoveBullets()
     {
-        // Looping though all bullets that are existing, making sure they're parented to the player and moving them at a speed variable timesed by time
+        //Looping though all bullets that are existing, making sure they're parented to the player and moving them at a speed variable timesed by time
         for (int i = 0; i < bullets.Count; i++)
         {
             if (bullets[i] != null)
             {
                 bullets[i].transform.parent = transform;
-                bullets[i].transform.Translate((Vector3.right * bulletSpeed) * Time.deltaTime);
+               // bullets[i].transform.Translate((Vector3.right * bulletSpeed) * Time.deltaTime);
             }
             else
             {
@@ -86,7 +85,7 @@ public class PlayerShooting : MonoBehaviour
             Instantiate(bullet, topShootPosition.transform.position,
             topShootPosition.transform.rotation);
             // destroys it after a set amount of time.
-            Destroy(newBull, bulletLifeTime);
+            Destroy(newBull, newBull.GetComponent<BulletScript>().bulletLifeTime);
             bullets.Add(newBull);
             topGunCooldown = 0.35f;
             --bulletBurst;
@@ -100,7 +99,7 @@ public class PlayerShooting : MonoBehaviour
         AudioManager.instance.PlaySound("shot");
         GameObject newBull = Instantiate(bullet, frontShootPosition.transform.position, frontShootPosition.transform.rotation);
 
-        Destroy(newBull, bulletLifeTime);
+        Destroy(newBull, newBull.GetComponent<BulletScript>().bulletLifeTime);
 
         bullets.Add(newBull);
         frontGunCooldown = 1.5f;

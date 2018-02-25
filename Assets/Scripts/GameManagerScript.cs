@@ -7,7 +7,7 @@ public class GameManagerScript : MonoBehaviour
 {
 
     public int playerScore, highScore;
-    public float timeBetweenReward = 30; 
+    public float timeBetweenReward = 30;
 
     public int playerLives;
 
@@ -34,7 +34,7 @@ public class GameManagerScript : MonoBehaviour
 
     }
 
-    IEnumerator ScoreReward ()
+    IEnumerator ScoreReward()
     {
         yield return new WaitForSeconds(timeBetweenReward);
         ChangeScore(50);
@@ -67,10 +67,11 @@ public class GameManagerScript : MonoBehaviour
 
         if (playerImmunity && immunityTime > 0)
         {
-            player.GetComponent<BoxCollider2D>().enabled = false;       
+            player.GetComponent<BoxCollider2D>().enabled = false;
             immunityTime -= Time.deltaTime;
         }
-        else {
+        else
+        {
             player.GetComponent<BoxCollider2D>().enabled = true;
             playerImmunity = false;
         }
@@ -82,7 +83,7 @@ public class GameManagerScript : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R))
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-         
+
         }
     }
 
@@ -102,10 +103,13 @@ public class GameManagerScript : MonoBehaviour
         --playerLives;
         Time.timeScale = 0;
         playersRend.enabled = false;
+        playersRend.gameObject.transform.GetChild(2).gameObject.SetActive(false);
         yield return new WaitForSecondsRealtime(flashTime);
         Time.timeScale = 1;
         playersRend.enabled = true;
-       
+        playersRend.gameObject.transform.GetChild(2).gameObject.SetActive(true);
+
+
 
     }
 

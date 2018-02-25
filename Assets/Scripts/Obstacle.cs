@@ -22,11 +22,7 @@ public class Obstacle : MonoBehaviour
 
         if (coll.gameObject.CompareTag("Bullet"))
         {
-            // calls a function to add a amount of score that is passed through
-            GameManagerScript.instance.ChangeScore(100);
-            gameObject.GetComponent<SpriteRenderer>().enabled = false;
-            Destroy(coll.gameObject);
-            Destroy(gameObject);
+           
         }
 
         if (coll.gameObject.CompareTag("Player"))

@@ -9,6 +9,7 @@ TagManager:
   - EnemyBullet
   - WayPointHolders
   - WayPointHolder
+  - Enemy
   layers:
   - Default
   - TransparentFX

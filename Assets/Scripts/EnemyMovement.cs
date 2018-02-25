@@ -33,7 +33,7 @@ public class EnemyMovement : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (player != null)
         {
@@ -110,10 +110,7 @@ public class EnemyMovement : MonoBehaviour {
        
         if (coll.gameObject.CompareTag("Bullet"))
         {
-            GameManagerScript.instance.ChangeScore(100);
-
-            Destroy(coll.gameObject);
-            Destroy(gameObject);
+            
         }
     }
 

@@ -6,6 +6,8 @@ public class AudioManager : MonoBehaviour
 {
     public List<AudioClip> sfx = new List<AudioClip>();
 
+    public AudioClip[] bulletCollsionFX;
+
     public AudioSource source;
 
 
@@ -22,6 +24,13 @@ public class AudioManager : MonoBehaviour
         {
             instance = this;
         }
+    }
+
+    public void PlayFX()
+    {
+        int randFX = Random.Range(0, bulletCollsionFX.Length);
+
+        source.PlayOneShot(bulletCollsionFX[randFX]);
     }
 
     // loops though tthe sound in a list to see if the name matches the name that was passed through the function when called 

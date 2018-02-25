@@ -67,12 +67,12 @@ public class GameManagerScript : MonoBehaviour
 
         if (playerImmunity && immunityTime > 0)
         {
-            player.GetComponent<BoxCollider2D>().enabled = false;
+           // player.GetComponent<BoxCollider2D>().enabled = false;
             immunityTime -= Time.deltaTime;
         }
         else
         {
-            player.GetComponent<BoxCollider2D>().enabled = true;
+            player.GetComponent<SpriteRenderer>().enabled = true;
             playerImmunity = false;
         }
         if (playerLives <= 0)

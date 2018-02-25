@@ -22,7 +22,7 @@ public class EnemyShooting : MonoBehaviour {
     public IEnumerator GunTimer ()
     {
         // runs an random chance for the enemy to spawn more than just one bullet
-        int amtToShoot = Random.Range(1, 3);
+        int amtToShoot = Random.Range(0, 3);
        
         yield return new WaitForSecondsRealtime(cooldown);
         if (amtToShoot > 1)
@@ -55,15 +55,15 @@ public class EnemyShooting : MonoBehaviour {
         
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         // loops through the bullets and movmes them.
         for (int i = 0; i < enemBullets.Count; i++)
         {
             if (enemBullets[i] != null)
             {
-               // enemBullets[i].transform.parent = transform;
-                enemBullets[i].transform.Translate((Vector3.right * bulletSpeed) * Time.deltaTime);
+                //enemBullets[i].transform.parent = transform;
+                enemBullets[i].transform.Translate ((new Vector3(1,1,0) * bulletSpeed) * Time.deltaTime);
             }
             else
             {

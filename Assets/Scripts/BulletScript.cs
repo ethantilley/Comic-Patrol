@@ -30,6 +30,7 @@ public class BulletScript : MonoBehaviour {
     {
         if (coll.gameObject.CompareTag("Obstacle"))
         {
+            CameraMovement.instance.shake = .3f;
             // calls a function to add a amount of score that is passed through
             AudioManager.instance.PlayFX();
             Destroy(coll.gameObject);
@@ -42,12 +43,25 @@ public class BulletScript : MonoBehaviour {
 
         if (coll.gameObject.CompareTag("Enemy"))
         {
+            CameraMovement.instance.shake = .3f;
             AudioManager.instance.PlayFX();
             Destroy(coll.gameObject);
             SpawnEffect();
             GameManagerScript.instance.ChangeScore(100);
 
             
+            Destroy(gameObject);
+        }
+
+        if (coll.gameObject.CompareTag("EnemyBullet"))
+        {
+            CameraMovement.instance.shake = .01f;
+            
+            Destroy(coll.gameObject);
+           
+            GameManagerScript.instance.ChangeScore(30);
+
+
             Destroy(gameObject);
         }
     }

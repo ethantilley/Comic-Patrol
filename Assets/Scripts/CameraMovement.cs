@@ -13,17 +13,35 @@ public class CameraMovement : MonoBehaviour {
 
     private float coolDown;
     public bool waitBetweenStrips;
+
+    public float shake;
+    public float shakeAmount = 0.7f;
+    public float decreaseFactor = 1;
+
     private void Awake()
     {
         instance = this;
     }
     // Use this for initialization
-    void Start () {
-		
-	}
+    void Update () {
+
+        if (shake > 0)
+        {
+            Vector2 shakePos = Random.insideUnitCircle * shakeAmount;
+            GetComponent<Camera>().transform.position = new Vector3(transform.position.x + shakePos.x, transform.position.y + shakePos.y, transform.position.z);
+            shake -= Time.deltaTime * decreaseFactor;
+        }
+        else
+        {
+            shake = 0;
+        }
+    }
    
 	// Update is called once per frame
 	void FixedUpdate () {
+
+
+
         Vector3 desPos = target.position + offset;
         Vector3 smoothedPos = Vector3.Lerp(transform.position, desPos, smoothedSpeed);
         transform.position = smoothedPos;

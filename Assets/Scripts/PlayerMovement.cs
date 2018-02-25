@@ -107,8 +107,9 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.gameObject.CompareTag("EnemyBullet"))
+        if (col.gameObject.CompareTag("EnemyBullet") && !GameManagerScript.instance.playerImmunity)
         {
+            
             StartCoroutine(GameManagerScript.instance.ReSpawnPlayer(GetComponent<SpriteRenderer>()));
         }
     }

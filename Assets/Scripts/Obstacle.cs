@@ -25,7 +25,7 @@ public class Obstacle : MonoBehaviour
            
         }
 
-        if (coll.gameObject.CompareTag("Player"))
+        if (coll.gameObject.CompareTag("Player") && !GameManagerScript.instance.playerImmunity)
         {
             gameObject.GetComponent<SpriteRenderer>().enabled = false;
             //check to see if the player has lives

@@ -94,15 +94,13 @@ public class PlayerMovement : MonoBehaviour
         if (jumping)
             return;
         // changeing the current speed by taking away or adding a percentage
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        if (Input.GetKey(KeyCode.LeftArrow))
             currentSpeed -= (baseSpeed * changeSpeedPercent);
-        if (Input.GetKeyUp(KeyCode.LeftArrow))
-            currentSpeed = (baseSpeed);
+        
 
-        if (Input.GetKeyDown(KeyCode.RightArrow))
+        if (Input.GetKey(KeyCode.RightArrow))
             currentSpeed += (baseSpeed * changeSpeedPercent);
-        if (Input.GetKeyUp(KeyCode.RightArrow))
-            currentSpeed = (baseSpeed);
+       
     }
 
     private void OnTriggerEnter2D(Collider2D col)

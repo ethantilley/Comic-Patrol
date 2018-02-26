@@ -68,7 +68,7 @@ public class SpawnManager : MonoBehaviour
                 levelItems.Add(item);
                 if (i > 0)
                 {
-                    float randX = Random.Range(spawnerPoint.position.x - (comicFrame[randFrame1].frameSize / 2.1f), spawnerPoint.position.x + (comicFrame[randFrame1].frameSize / 2.1f));
+                    float randX = Random.Range(spawnerPoint.position.x - (comicFrame[randFrame1].frameSize / 2.5f), spawnerPoint.position.x + (comicFrame[randFrame1].frameSize / 2.5f));
                     item = (GameObject)Instantiate(rock, new Vector2(randX, spawnerPoint.position.y - 3), Quaternion.identity);
                     levelItems.Add(item);
                 }
@@ -83,7 +83,7 @@ public class SpawnManager : MonoBehaviour
                 item = Instantiate(enemys[randEnem], spawnerPoint.position, Quaternion.identity);
                 levelItems.Add(item);
 
-                float randX2 = Random.Range(spawnerPoint.position.x - (comicFrame[randFrame1].frameSize / 2.1f), spawnerPoint.position.x + (comicFrame[randFrame1].frameSize / 2.1f));
+                float randX2 = Random.Range(spawnerPoint.position.x - (comicFrame[randFrame2].frameSize / 2.5f), spawnerPoint.position.x + (comicFrame[randFrame2].frameSize / 2.5f));
                 item = Instantiate(rock, new Vector2(randX2, spawnerPoint.position.y - 3), Quaternion.identity);
                 levelItems.Add(item);
 

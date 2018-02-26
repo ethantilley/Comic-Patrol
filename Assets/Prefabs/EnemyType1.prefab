@@ -109,7 +109,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 8.7, y: 12.87}
+    oldSize: {x: 11.92, y: 17.62}
     newSize: {x: 8.7, y: 12.87}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -151,7 +151,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cooldown: 2
   fireRate: 0.2
-  bulletSpeed: 4
+  bulletSpeed: 5
   enemBulletLifeTime: 3
   enemyBulletPrefab: {fileID: 1222735275552590, guid: 83872e9eb4ead1c43ba566c793a93db6,
     type: 2}
@@ -191,7 +191,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 11cec08ab826b3548bc76bf7fbd8af69, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 15bf29bcf548f564f978c276b12805d9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

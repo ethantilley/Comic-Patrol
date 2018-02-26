@@ -18,20 +18,37 @@ public class PlayerMovement : MonoBehaviour
     float interp = 0;
 
     public Animator anim;
-    private float maxSpeed = 7.5f;
-    private float minSpeed = 2.5f;
+    private float maxSpeed, minSpeed ;
 
     // Use this for initialization
     void Start()
     {
+        maxSpeed = baseSpeed + (baseSpeed * changeSpeedPercent);
+        minSpeed = baseSpeed - (baseSpeed * changeSpeedPercent);
 
+        InvokeRepeating("checkSpeed", 1f,1f);
     }
-
+    void checkSpeed()
+    {
+        print(currentSpeed);
+    }
     // Update is called once per frame
     void Update()
     {
         CheckInput();
+        // stoping the speed from ever going too high
+        if (currentSpeed > maxSpeed)
+        {
+            currentSpeed = maxSpeed;
+        }
 
+        if (currentSpeed < minSpeed)
+        {
+            currentSpeed = minSpeed;
+        }
+
+       
+       
     }
     void FixedUpdate()
     {
@@ -62,15 +79,7 @@ public class PlayerMovement : MonoBehaviour
                 //currentSpeed = baseSpeed;
                 //Hack, player can inc speed.
             }
-            // stoping the speed from ever going too high
-            if (currentSpeed > maxSpeed)
-            {
-                currentSpeed = maxSpeed;
-            }
-            else if (currentSpeed < minSpeed)
-            {
-                currentSpeed = minSpeed;
-            }
+           
                
         }
 
@@ -93,14 +102,20 @@ public class PlayerMovement : MonoBehaviour
         }
         if (jumping)
             return;
+
         // changeing the current speed by taking away or adding a percentage
         if (Input.GetKey(KeyCode.LeftArrow))
+        {
             currentSpeed -= (baseSpeed * changeSpeedPercent);
-        
+            return;
+        }
 
         if (Input.GetKey(KeyCode.RightArrow))
+        {
             currentSpeed += (baseSpeed * changeSpeedPercent);
-       
+            return;
+        }
+        currentSpeed = baseSpeed;
     }
 
     private void OnTriggerEnter2D(Collider2D col)

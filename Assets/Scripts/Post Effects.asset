@@ -36,8 +36,8 @@ MonoBehaviour:
         preset: 0
       taaSettings:
         jitterSpread: 0.1
-        sharpen: 0.84
-        stationaryBlending: 0.99
+        sharpen: 3
+        stationaryBlending: 0
         motionBlending: 0
   ambientOcclusion:
     m_Enabled: 0
@@ -289,7 +289,7 @@ MonoBehaviour:
     m_Enabled: 1
     m_Settings:
       colored: 0
-      intensity: 0.086
+      intensity: 0.096
       size: 1.32
       luminanceContribution: 0.602
   vignette:

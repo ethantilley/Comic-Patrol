@@ -47,17 +47,31 @@ public class SpawnManager : MonoBehaviour
 
     public void SpawnMap()
     {
-        // used for randomly choosing the differant comic frames.
         if (levelItems.Count > 0)
         {
+            print("destroying items");
+            print(levelItems.Count);
             for (int i = 0; i < levelItems.Count; i++)
             {
-                Destroy(levelItems[i].gameObject);
-                levelItems.RemoveAt(i);
+
+                //print("destroying item: " + levelItems[i].name);
+                Destroy(levelItems[i]);
+                levelItems.Remove(levelItems[i]);
+                //print(levelItems[i].name + "Destroyed");
             }
+            print(levelItems.Count);
+            if (levelItems.Count > 0)
+            {
+                SpawnMap();
+                return;
+            }
+            print(levelItems.Count);
         }
+
         for (int x = 0; x < 4; x++)
         {
+            // used for randomly choosing the differant comic frames.
+
             randFrame1 = Random.Range(0, (comicFrame.Length));
             randFrame2 = Random.Range(0, (comicFrame.Length));
             // loops till 'i' equals whatever  framePerStrip is set to
@@ -76,23 +90,23 @@ public class SpawnManager : MonoBehaviour
                 spawnerPoint.transform.position = new Vector2
                        (spawnerPoint.transform.position.x + (((comicFrame[randFrame1].frameSize / 2) + (comicFrame[randFrame2].frameSize / 2)) + comicFrame[1].gapDistance), spawnerPoint.position.y);
 
-                item = Instantiate(comicFrame[randFrame2].comicFramePrefab, spawnerPoint.transform.position, Quaternion.identity);
+                item = (GameObject)Instantiate(comicFrame[randFrame2].comicFramePrefab, spawnerPoint.transform.position, Quaternion.identity);
                 levelItems.Add(item);
 
                 int randEnem = Random.Range(0, enemys.Length);
-                item = Instantiate(enemys[randEnem], spawnerPoint.position, Quaternion.identity);
+                item = (GameObject)Instantiate(enemys[randEnem], spawnerPoint.position, Quaternion.identity);
                 levelItems.Add(item);
 
                 float randX2 = Random.Range(spawnerPoint.position.x - (comicFrame[randFrame2].frameSize / 2.5f), spawnerPoint.position.x + (comicFrame[randFrame2].frameSize / 2.5f));
-                item = Instantiate(rock, new Vector2(randX2, spawnerPoint.position.y - 3), Quaternion.identity);
+                item = (GameObject)Instantiate(rock, new Vector2(randX2, spawnerPoint.position.y - 3), Quaternion.identity);
                 levelItems.Add(item);
 
                 spawnerPoint.transform.position = new Vector2
                       (spawnerPoint.transform.position.x + (((comicFrame[randFrame1].frameSize / 2) + (comicFrame[randFrame2].frameSize / 2)) + comicFrame[1].gapDistance), spawnerPoint.position.y);
-               
+
                 if (i == 2 && x == 3)
                 {
-                    item = Instantiate(endLevelObj, spawnerPoint.position, Quaternion.identity);
+                    item = (GameObject)Instantiate(endLevelObj, spawnerPoint.position, Quaternion.identity);
                     levelItems.Add(item);
                     spawnerPoint.transform.position = new Vector2(0, 0);
                     break;
@@ -100,7 +114,7 @@ public class SpawnManager : MonoBehaviour
 
                 if (i == 2)
                 {
-                    item = Instantiate(endFrameObj, spawnerPoint.transform.position, Quaternion.identity);
+                    item = (GameObject)Instantiate(endFrameObj, spawnerPoint.transform.position, Quaternion.identity);
                     levelItems.Add(item);
                     spawnerPoint.transform.position = new Vector2(0, spawnerPoint.position.y - stripGapDistance);
                 }

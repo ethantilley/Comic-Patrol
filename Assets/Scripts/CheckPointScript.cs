@@ -22,21 +22,24 @@ public class CheckPointScript : MonoBehaviour {
             return;
         if (endLevelOnColl)
         {
-            SpawnManager.instance.SpawnMap();
+            gameObject.GetComponent<BoxCollider2D>().enabled = false;
+            player.min = -3f;
+            player.max = player.min + 1.2f;
+            player.jumpHeight = -2.2f;
             player.transform.position = new Vector2(0, player.min);
+
+            SpawnManager.instance.SpawnMap();
             CameraMovement.instance.waitBetweenStrips = true;
 
-            player.min = -2.5f;
-            player.max = player.min + 1;
-            player.jumpHeight = -1.5f;
         }
         else
         {
+            gameObject.GetComponent<BoxCollider2D>().enabled = false;
             AudioManager.instance.PlaySound("PLStripOver");
             player.transform.position = new Vector2(0, player.transform.position.y - SpawnManager.instance.stripGapDistance);
             CameraMovement.instance.waitBetweenStrips = true;
             player.min -= SpawnManager.instance.stripGapDistance;
-            player.max = player.min + 1;
+            player.max = player.min + 1.2f;
             player.jumpHeight -= SpawnManager.instance.stripGapDistance;
         }
     }

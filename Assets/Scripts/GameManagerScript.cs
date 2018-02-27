@@ -73,6 +73,7 @@ public class GameManagerScript : MonoBehaviour
         else
         {
             player.GetComponent<SpriteRenderer>().enabled = true;
+            player.gameObject.transform.GetChild(2).gameObject.SetActive(true);
             playerImmunity = false;
         }
         if (playerLives <= 0)

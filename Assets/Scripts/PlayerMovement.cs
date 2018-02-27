@@ -14,7 +14,7 @@ public class PlayerMovement : MonoBehaviour
     public bool jumping = false;
     public bool moving = true;
 
-    public float min = -2.5f, max = -1.5f;
+    public float min, max;
     float interp = 0;
 
     public Animator anim;
@@ -26,9 +26,9 @@ public class PlayerMovement : MonoBehaviour
         maxSpeed = baseSpeed + (baseSpeed * changeSpeedPercent);
         minSpeed = baseSpeed - (baseSpeed * changeSpeedPercent);
 
-        InvokeRepeating("checkSpeed", 1f,1f);
+        //InvokeRepeating("checkSpeed", 1f,1f);
     }
-    void checkSpeed()
+    void CheckSpeed()
     {
         print(currentSpeed);
     }

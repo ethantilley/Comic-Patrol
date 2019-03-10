@@ -15,5 +15,5 @@ A Comic book side scrolling adventure. Scroll your way through endless randomly 
 
 ## Acknowledgments
 
-* Hat tip to our lectures (Tony Parmenter & Steve Halliwal) who fasilitated us through this project. <3
+* Hat tip to our lectures (Tony Parmenter & Steve Halliwal) who facilitated us through this project. <3
 * Artwork style inspired by the artist Roy Lichtenstein. His work was greatly inspired by the classic comic book strip and yet was criticized for copying the classic comic style. Roy Lichtenstein's immense  criticism that followed him his hole life was exactly what I tried to achieve here in this game, trapped in a endless comic book. 
